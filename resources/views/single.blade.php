@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Page Title</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 @if($result->category == 'pekara')

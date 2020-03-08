@@ -56,7 +56,7 @@ class ProductController extends Controller
 
         \QrCode::format('png')->size(150)
                 ->errorCorrection('H')
-                ->generate(base_path().. $city .'/'.$user_dir.'/'.$product->product_slug, public_path('images/'.$user_dir.'-'.$str.'/'. $qr_name));
+                ->generate('http://104.248.19.84/company/'. $city .'/'.$user_dir.'/'.$product->product_slug, public_path('images/'.$user_dir.'-'.$str.'/'. $qr_name));
 
     	if($product->save()){
             foreach($request->ing_name as $ing_name){

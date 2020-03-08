@@ -57,7 +57,7 @@ class MerchandiseController extends Controller
 
         \QrCode::format('png')->size(150)
                 ->errorCorrection('H')
-                ->generate(base_path(). $city .'/'.$user_dir.'/'.$merch->slug, public_path('images/'.$user_dir.'-'.$str.'/'. $qr_name));
+                ->generate('http://104.248.19.84/company/'. $city .'/'.$user_dir.'/'.$merch->slug, public_path('images/'.$user_dir.'-'.$str.'/'. $qr_name));
 
         $merch->save();
 

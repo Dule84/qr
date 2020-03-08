@@ -3,6 +3,7 @@
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="/css/bootstrap.css">
     <script src="/js/jquery.js" type="text/javascript"></script>
     <script src="/js/bootstrap.js" type="text/javascript"></script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Session;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
 
         $city = strtr($request->input('city'),$array_from_to);
 
-        mkdir(public_path('images/'.strtolower($file).'-'.$unique_str));
+        mkdir(public_path('images/'.strtolower($file).'-'.$unique_str), 0755, true);
 
         $user = new User([
             'email' => $request->input('email'),
@@ -70,23 +71,27 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'email|required',
-            'password' => 'required|min:4',
+            'password' => 'required',
         ],[
             'email.required' => 'Email je obavezan!',
             'email.email' => 'Email mora sadrzati znak @!',
-            'password.required' => 'Lozinka je obavezna!',
-            'password.min' => 'Lozinka mora imati vise od 4 karaktera!'
+            'password.required' => 'Lozinka je obavezna!'
         ]);
 
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+//	dd($request->all());
+
+
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         
             return redirect()->route('dashboard');
         }
-        return redirect()->back();
+        return redirect()->route('signin');
     }
 
     public function getLogout() {
         Auth::logout();
+	Session::remove('password_hash');
+	//Session::flush();
         return redirect()->route('signin');
     }
 }
